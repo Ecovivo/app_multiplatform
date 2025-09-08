@@ -118,11 +118,11 @@ const Innert: InnertProps = ({ projects }) => {
     };
     return <PlantFactor handlePress={handlePlantFactor} />;
   }
+  */
 
   if (isResult) {
     return <Result />;
   }
-    */
 
   return null;
 };

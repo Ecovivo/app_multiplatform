@@ -36,7 +36,7 @@ const AutonomyDays: AutonomyDaysProps = ({ handlePress }) => {
             />
           );
         })}
-        <Next isDisabled={Boolean(value)} handlePress={handlePress(value)} />
+        <Next isDisabled={!Boolean(value)} handlePress={handlePress(value)} />
       </View>
     </ScrollView>
   );

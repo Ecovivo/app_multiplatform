@@ -38,7 +38,7 @@ const DischargeDepth: DischargeDepthProps = ({ handlePress }) => {
             />
           );
         })}
-        <Next isDisabled={Boolean(value)} handlePress={handlePress(value)} />
+        <Next isDisabled={!Boolean(value)} handlePress={handlePress(value)} />
       </View>
     </ScrollView>
   );
