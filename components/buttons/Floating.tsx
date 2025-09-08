@@ -1,7 +1,7 @@
 import type { FloatingProps } from "../../models";
 
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, TouchableOpacity, StyleSheet } from "react-native";
 
 import { add, Color } from "../../values";
 import { SvgXml } from "react-native-svg";
@@ -17,9 +17,6 @@ const Floating: FloatingProps = ({ projectType, handlePress }) => {
       : styles.fabBudget;
   return (
     <View style={styles.container}>
-      {/* Your main screen content goes here */}
-      <Text>This is some content on the screen.</Text>
-
       <TouchableOpacity style={iconFab} onPress={handlePress}>
         <SvgXml xml={add} width={32} height={32} />
       </TouchableOpacity>
@@ -37,7 +34,7 @@ const styles = StyleSheet.create({
     width: 64,
     height: 64,
     right: 20,
-    bottom: 20,
+    bottom: 40,
     borderRadius: 30,
     elevation: 8, // Android shadow
     shadowColor: "#000", // iOS shadow

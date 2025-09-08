@@ -1,16 +1,13 @@
 import type { Dispatch, FC, SetStateAction } from "react";
 import type { HandleVoid } from "../utils";
+import { ProjectDAO } from "../domain";
 
 export interface IntroInput {
-  isFocused: boolean;
   projectName: string;
-  handleBlur: HandleVoid;
-  handleFocused: HandleVoid;
+  projects: ProjectDAO[];
   onChangeProjectName: Dispatch<SetStateAction<string>>;
   handleCreate: HandleVoid;
   handleView: HandleVoid;
-  hasProjectName: boolean;
-  hasProjects: boolean;
 }
 
 export type IntroProps = FC<IntroInput>;

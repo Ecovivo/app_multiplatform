@@ -1,6 +1,6 @@
 import type { IntroProps } from "../models";
 
-import React from "react";
+import React, { useState } from "react";
 import { SvgXml } from "react-native-svg";
 import { ScrollView, StyleSheet, TextInput, View, Button } from "react-native";
 
@@ -8,16 +8,17 @@ import { Color } from "../values";
 import { cloud, cloudRaining, logo, trees } from "../values";
 
 const Intro: IntroProps = ({
-  isFocused,
+  projects,
   projectName,
-  handleBlur,
-  handleFocused,
   onChangeProjectName,
   handleCreate,
   handleView,
-  hasProjectName,
-  hasProjects,
 }) => {
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const handleFocused = () => setIsFocused(true);
+  const handleBlur = () => setIsFocused(false);
+  const hasProjectName = projectName === "";
+  const hasProjects = projects?.length === 0;
   return (
     <ScrollView
       contentContainerStyle={styles.scrollContent}

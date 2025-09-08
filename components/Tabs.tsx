@@ -27,7 +27,6 @@ const Tabs: TabsProps = ({ labels, components, tabs, icons, handlePress }) => {
   };
 
   const handleNextPress = () => {
-    console.log(",,,,,,,,,,,,,", tabs, tabs.length);
     const index = tabs.findIndex(() => activeTab);
     setActiveTab(index + 1 <= tabs.length ? tabs[index + 1] : null);
   };
@@ -47,9 +46,8 @@ const Tabs: TabsProps = ({ labels, components, tabs, icons, handlePress }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.titleTabs}>{activeLabel}</Text>
-
       <View style={styles.tabBar}>
-        {tabs.map((it) => (
+        {tabs.map((it, i) => (
           <TouchableOpacity
             key={it}
             onPress={getHandlePress(it)}
@@ -59,7 +57,12 @@ const Tabs: TabsProps = ({ labels, components, tabs, icons, handlePress }) => {
               activeTab === it && styles.activeTabButton,
             ]}
           >
-            <SvgXml xml={icon} width={24} height={24} color={getColorTab(it)} />
+            <SvgXml
+              xml={icons[i]}
+              width={24}
+              height={24}
+              color={getColorTab(it)}
+            />
           </TouchableOpacity>
         ))}
       </View>

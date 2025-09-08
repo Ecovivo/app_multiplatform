@@ -1,10 +1,19 @@
-import { FC } from "react";
-import { Text, StyleSheet } from "react-native";
+import type { ComponentProps } from "../../models";
 
-import { Color } from "../../values";
+import { Text, View, StyleSheet } from "react-native";
 
-const SlideOne: FC = () => {
-  return <Text style={styles.content}>Content for Tab 1 sfgsdfgs</Text>;
+import { Color, getCategories } from "../../values";
+import { Next } from "../../components";
+
+const SlideOne: ComponentProps = ({ handlePress }) => {
+  return (
+    <View>
+      {getCategories() && (
+        <Text style={styles.content}>Content for Tab 1 sfgsdfgs</Text>
+      )}
+      <Next isDisabled={true} handlePress={handlePress} />
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({

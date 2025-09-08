@@ -30,11 +30,8 @@ const Innert: InnertProps = ({ projects }) => {
   const db = useSQLiteContext();
   const [id, setId] = useState<number>();
   const [screen, setScreen] = useState<MyScreen>("intro");
-  const [isFocused, setIsFocused] = useState<boolean>(false);
   const [projectName, onChangeProjectName] = useState<string>("");
 
-  const handleFocused = () => setIsFocused(true);
-  const handleBlur = () => setIsFocused(false);
   const handleCreate = () => {
     setScreen("selected");
   };
@@ -54,11 +51,8 @@ const Innert: InnertProps = ({ projects }) => {
       getTypeProject(type)
     );
     setId(result.lastInsertRowId);
-    //console.log(result.lastInsertRowId);
     setScreen(type);
   };
-
-  if (!projects?.length) return null;
 
   const isIntro = screen === "intro";
   const isProjects = screen === "projects";
@@ -67,22 +61,15 @@ const Innert: InnertProps = ({ projects }) => {
   const isAdapted = screen === "adapted";
   const isArea = screen === "area";
   const isBudget = screen === "budget";
-  const hasProjects = projects.length === 0;
-  const hasProjectName = projectName === "";
+
   if (isIntro) {
     return (
       <Intro
-        {...{
-          isFocused,
-          projectName,
-          handleBlur,
-          handleFocused,
-          onChangeProjectName,
-          handleCreate,
-          handleView,
-          hasProjectName,
-          hasProjects,
-        }}
+        projects={projects}
+        handleView={handleView}
+        projectName={projectName}
+        handleCreate={handleCreate}
+        onChangeProjectName={onChangeProjectName}
       />
     );
   }

@@ -78,5 +78,21 @@ export const gear = `<svg width="29" height="30" viewBox="0 0 29 30" xmlns="http
 </svg>`;
 
 export const add = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
-  <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" fill="currentColor"/>
+  <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" fill="currentColor" />
+</svg>`;
+
+export const arrow = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+  <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" fill="currentColor" />
+</svg>`;
+
+export const material = `<svg width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
+  <path d="M5.25 0.5H2.75V8H5.25V0.5ZM20.25 0.5H17.75V13H20.25V0.5ZM0.25 13H2.75V23H5.25V13H7.75V10.5H0.25V13ZM15.25 5.5H12.75V0.5H10.25V5.5H7.75V8H15.25V5.5ZM10.25 23H12.75V10.5H10.25V23ZM15.25 15.5V18H17.75V23H20.25V18H22.75V15.5H15.25Z" fill="currentColor" />
+</svg>`;
+
+export const kind = `<svg width="24" height="26" viewBox="0 0 24 26" xmlns="http://www.w3.org/2000/svg">
+  <path d="M10.125 14.625V24.625H0.125V14.625H10.125ZM11.375 0.25L18.25 11.5H4.5L11.375 0.25ZM18.25 14C21.375 14 23.875 16.5 23.875 19.625C23.875 22.75 21.375 25.25 18.25 25.25C15.125 25.25 12.625 22.75 12.625 19.625C12.625 16.5 15.125 14 18.25 14Z" fill="currentColor"  />
+</svg>`;
+
+export const time = `<svg width="23" height="27" viewBox="0 0 23 27" xmlns="http://www.w3.org/2000/svg">
+  <path d="M20.2875 8.6125L22.0625 6.8375C21.5 6.2 20.9375 5.625 20.3 5.075L18.525 6.875C16.5875 5.3 14.15 4.375 11.5 4.375C5.2875 4.375 0.25 9.4125 0.25 15.625C0.25 21.8375 5.2875 26.875 11.5 26.875C17.75 26.875 22.75 21.8375 22.75 15.625C22.75 12.975 21.825 10.5375 20.2875 8.6125ZM12.75 16.875H10.25V8.125H12.75V16.875ZM15.25 0.625H7.75V3.125H15.25V0.625Z" fill="currentColor" />
 </svg>`;
