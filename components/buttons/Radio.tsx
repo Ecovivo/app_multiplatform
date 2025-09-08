@@ -1,7 +1,9 @@
 import type { RadioProps } from "../../models";
 
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+
+import { Color } from "../../values";
 
 const Radio: RadioProps = ({ label, selected, onSelect }) => {
   return (
@@ -20,29 +22,29 @@ const styles = StyleSheet.create({
   radioContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginVertical: 5,
+    marginVertical: 12,
   },
   radioCircle: {
     height: 24,
     width: 24,
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: "#000",
+    borderColor: Color.card.text,
     alignItems: "center",
     justifyContent: "center",
   },
   selectedRadioCircle: {
-    borderColor: "blue", // Example for selected state
+    borderColor: Color.card.success,
   },
   innerCircle: {
     height: 12,
     width: 12,
     borderRadius: 6,
-    backgroundColor: "blue", // Example for selected state
+    backgroundColor: Color.card.success,
   },
   radioLabel: {
-    marginLeft: 10,
-    fontSize: 16,
+    marginLeft: 12,
+    fontSize: 18,
   },
 });
 

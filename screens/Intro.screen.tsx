@@ -18,7 +18,8 @@ const Intro: IntroProps = ({
   const handleFocused = () => setIsFocused(true);
   const handleBlur = () => setIsFocused(false);
   const hasProjectName = projectName === "";
-  const hasProjects = projects?.length === 0;
+  const hasProjects =
+    typeof projects === "undefined" ? false : projects?.length === 0;
   return (
     <ScrollView
       contentContainerStyle={styles.scrollContent}

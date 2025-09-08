@@ -3,8 +3,8 @@ import type { HandleVoid } from "../../utils";
 
 interface RadioInput {
   label: string;
-  selected: string;
-  onSelect: (text: string) => HandleVoid;
+  selected: boolean;
+  onSelect: HandleVoid;
 }
 
 export type RadioProps = FC<RadioInput>;

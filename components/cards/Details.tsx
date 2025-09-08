@@ -1,12 +1,18 @@
-import type { TypesProps } from "../../models";
+import type { DetailsProps } from "../../models";
 
 import React from "react";
 import { SvgXml } from "react-native-svg";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 
-import { Color, getIconByUUID, getTitleByUUID } from "../../values";
+import { Color, getDetailIconByUUID } from "../../values";
 
-const Types: TypesProps = ({ handlePress, label, uuid }) => {
+const Details: DetailsProps = ({
+  handlePress,
+  label,
+  title,
+  description,
+  uuid,
+}) => {
   const iconContainer =
     uuid === "demand"
       ? styles.iconContainerDemand
@@ -19,11 +25,17 @@ const Types: TypesProps = ({ handlePress, label, uuid }) => {
     <View>
       <Pressable onPress={handlePress(uuid)} style={styles.container}>
         <View style={iconContainer}>
-          <SvgXml xml={getIconByUUID(uuid)} width={24} height={24} />
+          <SvgXml
+            xml={getDetailIconByUUID(uuid)}
+            width={24}
+            height={24}
+            color={Color.card.bg}
+          />
         </View>
         <View style={styles.textContainer}>
-          <Text style={styles.title}>{getTitleByUUID(uuid)}</Text>
+          <Text style={styles.title}>{title}</Text>
           <Text style={styles.subtitle}>{label}</Text>
+          <Text style={styles.text}>{description}</Text>
         </View>
       </Pressable>
     </View>
@@ -48,18 +60,18 @@ const styles = StyleSheet.create({
     elevation: 3, // For Android shadow
   },
   iconContainerDemand: {
-    width: 80,
-    height: 80,
+    width: 100,
+    height: 100,
     marginRight: 16,
     alignItems: "center",
     borderStartEndRadius: 2,
     justifyContent: "center",
     borderStartStartRadius: 2,
-    backgroundColor: Color.dark.danger,
+    backgroundColor: Color.card.danger,
   },
   iconContainerBudget: {
-    width: 80,
-    height: 80,
+    width: 100,
+    height: 100,
     marginRight: 16,
     alignItems: "center",
     borderStartEndRadius: 2,
@@ -68,8 +80,8 @@ const styles = StyleSheet.create({
     backgroundColor: Color.dark.success,
   },
   iconContainerAdapted: {
-    width: 80,
-    height: 80,
+    width: 100,
+    height: 100,
     marginRight: 16,
     alignItems: "center",
     borderStartEndRadius: 2,
@@ -78,8 +90,8 @@ const styles = StyleSheet.create({
     backgroundColor: Color.dark.warning,
   },
   iconContainerArea: {
-    width: 80,
-    height: 80,
+    width: 100,
+    height: 100,
     marginRight: 16,
     alignItems: "center",
     borderStartEndRadius: 2,
@@ -92,16 +104,21 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   title: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "700",
-    color: Color.dark.bg,
+    color: Color.card.text,
     marginBottom: 2,
   },
   subtitle: {
-    fontSize: 16,
-    color: Color.dark.bg,
+    fontSize: 14,
+    color: Color.card.text,
+    fontWeight: "400",
+  },
+  text: {
+    fontSize: 12,
+    color: Color.card.text,
     fontWeight: "400",
   },
 });
 
-export { Types };
+export { Details };

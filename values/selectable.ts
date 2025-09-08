@@ -1,6 +1,6 @@
-import type { Selectable, SelectType, CardMapper, IconMapper } from "../models";
+import type { SelectType, CardMapper, IconMapper } from "../models";
 
-import { money, trunder, area, gear } from "./vectors";
+import { money, trunder, area, gear, material } from "./vectors";
 
 export const cardMapper: CardMapper = {
   demand: {
@@ -43,8 +43,19 @@ const iconMapper: IconMapper = {
   budget: money,
 };
 
+const iconDetailMapper: IconMapper = {
+  demand: material,
+  adapted: gear,
+  area: area,
+  budget: money,
+};
+
 type GetIconByUUID = (uuid: SelectType) => string;
 export const getIconByUUID: GetIconByUUID = (uuid) => iconMapper[uuid];
+
+type GetDetailIconByUUID = (uuid: SelectType) => string;
+export const getDetailIconByUUID: GetDetailIconByUUID = (uuid) =>
+  iconDetailMapper[uuid];
 
 type GetTitleByUUID = (uuid: SelectType) => string;
 export const getTitleByUUID: GetTitleByUUID = (uuid) => titleMapper[uuid];

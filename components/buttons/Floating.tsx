@@ -18,7 +18,7 @@ const Floating: FloatingProps = ({ projectType, handlePress }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={iconFab} onPress={handlePress}>
-        <SvgXml xml={add} width={32} height={32} />
+        <SvgXml xml={add} width={36} height={36} />
       </TouchableOpacity>
     </View>
   );
@@ -27,6 +27,7 @@ const Floating: FloatingProps = ({ projectType, handlePress }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    zIndex: 10,
     justifyContent: "center",
     alignItems: "center",
   },

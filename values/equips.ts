@@ -1,9 +1,5 @@
-interface Equip {
-  name: string;
-  type: string;
-  power: number;
-  average_daily_hour: number;
-}
+import type { Equip, GetCategories, GetItemByCategory } from "../models";
+import type { GetItemByKindAndCategory } from "../models";
 
 const equips: Equip[] = [
   {
@@ -367,11 +363,31 @@ const equips: Equip[] = [
   { name: "Luminaria", type: "Led 75W", power: 9, average_daily_hour: 8.0 },
 ];
 
-type GetCategories = () => string[];
-
 export const getCategories: GetCategories = () =>
   Array.from(
     equips.reduce((prev, curr) => {
       return prev.add(curr.name);
     }, new Set<string>())
   );
+
+export const getItemByCategory: GetItemByCategory = (category) =>
+  equips.filter((item) => category === item.name);
+
+export const getItemByKindAndCategory: GetItemByKindAndCategory = (
+  category,
+  kind
+) => {
+  const el = equips.find(
+    (item) => item.name === category && item.type === kind
+  );
+  const baseEl = {
+    power: el?.power ?? 0,
+    hours: el?.average_daily_hour ?? 0,
+    label: el?.average_daily_hour
+      ? `${el.average_daily_hour} horas (Recomendado)`
+      : "",
+  };
+  return [baseEl];
+};
+
+//[ 0.5, 1, 2, 3, 4, 5, 6, 8, 15,24 ];

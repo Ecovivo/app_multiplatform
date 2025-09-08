@@ -8,10 +8,11 @@ import { SvgXml } from "react-native-svg";
 
 const Next: NextProps = ({ isDisabled, handlePress }) => {
   const iconFab = isDisabled ? styles.fabDisabled : styles.fabAbled;
+  const iconColor = isDisabled ? "white" : Color.card.text;
   return (
     <View style={styles.container}>
       <TouchableOpacity style={iconFab} onPress={handlePress}>
-        <SvgXml xml={arrow} width={36} height={36} />
+        <SvgXml xml={arrow} width={36} height={36} color={iconColor} />
       </TouchableOpacity>
     </View>
   );
@@ -20,45 +21,42 @@ const Next: NextProps = ({ isDisabled, handlePress }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    zIndex: 10,
     justifyContent: "center",
     alignItems: "center",
   },
   fabDisabled: {
     width: 64,
     height: 64,
-    right: -100,
+    right: 20,
     bottom: 40,
-    borderRadius: 30,
-    elevation: 8, // Android shadow
+    borderRadius: 36,
+    elevation: 16, // Android shadow
     shadowColor: "#000", // iOS shadow
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     position: "absolute",
     alignItems: "center",
-    justifyContent: "center",
-    color: Color.dark.bg,
     backgroundColor: "gray",
+    justifyContent: "center",
     shadowOffset: { width: 0, height: 2 },
   },
   fabAbled: {
     width: 64,
     height: 64,
-    right: -100,
+    right: 20,
     bottom: 40,
-    borderRadius: 30,
-    elevation: 8, // Android shadow
+    borderRadius: 36,
+    elevation: 16, // Android shadow
     shadowColor: "#000", // iOS shadow
-    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     position: "absolute",
     alignItems: "center",
+    color: Color.card.text,
     justifyContent: "center",
     backgroundColor: Color.card.success,
-  },
-  fabText: {
-    fontSize: 24,
-    color: "white",
+    shadowOffset: { width: 0, height: 2 },
   },
 });
 

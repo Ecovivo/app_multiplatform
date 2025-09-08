@@ -1,27 +1,37 @@
 import type { ComponentProps } from "../../models";
 
 import { useState } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 
-import { Color, getCategories } from "../../values";
 import { Next } from "../../components";
+import { useDemand } from "../../stores";
+import { getCategories } from "../../values";
 import { Radio } from "../../components/buttons/Radio";
 
 const SlideOne: ComponentProps = ({ handlePress }) => {
-  const [selected, useSelected] = useState<string>("");
+  const [isDisabled, setIsDisabled] = useState<boolean>(true);
+  const { category, setCategory } = useDemand();
   const categories = getCategories();
-  const onSelect = (text: string) => () => useSelected(text);
+
   return (
     <View style={styles.content}>
-      {categories.map((text: string) => (
-        <Radio
-          label={text}
-          selected={selected}
-          onSelect={onSelect}
-          key={text}
-        />
-      ))}
-      <Next isDisabled={true} handlePress={handlePress} />
+      <ScrollView>
+        {categories.map((item: string) => {
+          const onSelect = (item: string) => () => {
+            setCategory(item);
+            setIsDisabled(false);
+          };
+          return (
+            <Radio
+              label={item}
+              selected={category === item}
+              onSelect={onSelect(item)}
+              key={item}
+            />
+          );
+        })}
+      </ScrollView>
+      <Next isDisabled={isDisabled} handlePress={handlePress} />
     </View>
   );
 };
@@ -30,9 +40,6 @@ const styles = StyleSheet.create({
   content: {
     width: "100%",
     height: "100%",
-  },
-  items: {
-    color: Color.card.text,
   },
 });
 

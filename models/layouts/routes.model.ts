@@ -6,5 +6,9 @@ const MyScreens = [
   "adapted",
   "area",
   "budget",
+  "dischargeDepth",
+  "autonomyDays",
+  "plantFactor",
+  "result",
 ] as const;
 export type MyScreen = (typeof MyScreens)[number];
