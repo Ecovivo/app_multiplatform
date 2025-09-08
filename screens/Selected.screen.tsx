@@ -1,12 +1,11 @@
 import { Text, ScrollView, StyleSheet } from "react-native";
-//import { useSQLiteContext } from "expo-sqlite";
+import { useSQLiteContext } from "expo-sqlite";
 
+import { Types } from "../components";
 import { SelectedProps } from "../models";
 import { Color, cardMapper } from "../values";
-import { Types } from "../components";
 
-const Selected: SelectedProps = ({ handleSelected }) => {
-  //const db = useSQLiteContext();
+const Selected: SelectedProps = ({ handlePress }) => {
   return (
     <ScrollView
       contentContainerStyle={styles.scrollContent}
@@ -16,7 +15,7 @@ const Selected: SelectedProps = ({ handleSelected }) => {
       {Object.values(cardMapper).map((it) => {
         const { uuid, description, label } = it;
         return (
-          <Types key={uuid} {...{ uuid, label, description, handleSelected }} />
+          <Types key={uuid} {...{ uuid, label, description, handlePress }} />
         );
       })}
     </ScrollView>

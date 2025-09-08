@@ -3,9 +3,9 @@ import type { ItemsProps } from "../../models";
 import React from "react";
 import { SvgXml } from "react-native-svg";
 import { View, Text, StyleSheet, Pressable } from "react-native";
-import { Color } from "../../values";
+import { Color, getIconByUUID } from "../../values";
 
-const Items: ItemsProps = ({ handleSelected, name, type, uuid }) => {
+const Items: ItemsProps = ({ handlePress, id, uuid, name }) => {
   const iconContainer =
     uuid === "demand"
       ? styles.iconContainerDemand
@@ -16,13 +16,10 @@ const Items: ItemsProps = ({ handleSelected, name, type, uuid }) => {
       : styles.iconContainerBudget;
   return (
     <View>
-      <Pressable onPress={handleSelected(uuid)} style={styles.container}>
+      <Pressable onPress={handlePress(uuid, id)} style={styles.container}>
         <View style={iconContainer}>
-          <SvgXml xml={icon} width={24} height={24} />
-        </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.subtitle}>{label}</Text>
+          <SvgXml xml={getIconByUUID(uuid)} width={24} height={24} />
+          <Text style={styles.title}>{name}</Text>
         </View>
       </Pressable>
     </View>
@@ -32,58 +29,55 @@ const Items: ItemsProps = ({ handleSelected, name, type, uuid }) => {
 const styles = StyleSheet.create({
   container: {
     marginTop: 16,
-    marginHorizontal: 24,
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: Color.dark.text,
     borderRadius: 2,
-    shadowColor: Color.dark.bg,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
     shadowRadius: 4,
+    shadowOpacity: 0.1,
+    marginHorizontal: 24,
+    alignItems: "center",
+    flexDirection: "row",
+    shadowColor: Color.dark.bg,
+    backgroundColor: Color.dark.text,
+    shadowOffset: { width: 0, height: 2 },
     elevation: 3, // For Android shadow
   },
   iconContainerDemand: {
-    width: 80,
     height: 80,
+    width: "100%",
+    borderRadius: 2,
     marginRight: 16,
+    flexDirection: "row",
     alignItems: "center",
-    borderStartEndRadius: 2,
     justifyContent: "center",
-    borderStartStartRadius: 2,
     backgroundColor: Color.dark.danger,
   },
   iconContainerBudget: {
-    width: 80,
     height: 80,
+    width: "100%",
+    borderRadius: 2,
     marginRight: 16,
+    flexDirection: "row",
     alignItems: "center",
-    borderStartEndRadius: 2,
     justifyContent: "center",
-    borderStartStartRadius: 2,
     backgroundColor: Color.dark.success,
   },
   iconContainerAdapted: {
-    width: 80,
     height: 80,
+    width: "100%",
+    borderRadius: 2,
     marginRight: 16,
+    flexDirection: "row",
     alignItems: "center",
-    borderStartEndRadius: 2,
     justifyContent: "center",
-    borderStartStartRadius: 2,
     backgroundColor: Color.dark.warning,
   },
   iconContainerArea: {
-    width: 80,
     height: 80,
+    width: "100%",
+    borderRadius: 2,
     marginRight: 16,
+    flexDirection: "row",
     alignItems: "center",
-    borderStartEndRadius: 2,
     justifyContent: "center",
-    borderStartStartRadius: 2,
     backgroundColor: Color.dark.primary,
   },
   textContainer: {
@@ -92,14 +86,15 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
+    width: "80%",
+    marginLeft: 8,
     fontWeight: "700",
     color: Color.dark.bg,
-    marginBottom: 2,
   },
   subtitle: {
     fontSize: 16,
-    color: Color.dark.bg,
     fontWeight: "400",
+    color: Color.dark.bg,
   },
 });
 export { Items };

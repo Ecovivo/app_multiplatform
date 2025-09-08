@@ -4,27 +4,14 @@ import { useState } from "react";
 import { SvgXml } from "react-native-svg";
 import { Text, ScrollView, StyleSheet, View } from "react-native";
 
-import { add, Color, cardMapper } from "../values";
-import { cloud, cloudRaining, logo, trees } from "../values";
-import { Resources, FloatingButton, Tabs } from "../components";
+import { Color, cardMapper, trees } from "../values";
+import { Resources, Floating, Tabs } from "../components";
+import { icons, tabs, components, labels, projectType } from "./demand";
 
-const Slide1 = () => (
-  <Text style={styles.content}>Content for Tab 1 sfgsdfgs</Text>
-);
-const Slide2 = () => (
-  <Text style={styles.content}>Content for Tab 2sdfgsdf sdfgsdfs</Text>
-);
-const Slide3 = () => (
-  <Text style={styles.content}>Content for Tab 3sgfdsdfxdfgsdfggsdfg</Text>
-);
-
-const icons = [add, add, add, add];
-const tabs = ["Tab1", "Tab2", "Tab3"];
-const components = [Slide1, Slide2, Slide3];
-const labels = ["Categoria de equipo", "Tipo de equipos", "Uso de equipo"];
-
-const Demand: DeamandProps = ({ projectType }) => {
+const Demand: DeamandProps = ({ id }) => {
   const [showForm, setShowForm] = useState<boolean>(false);
+  const handleFormOpen = () => setShowForm(true);
+  const handleFormClose = () => setShowForm(false);
   return (
     <ScrollView
       contentContainerStyle={styles.scrollContent}
@@ -34,7 +21,7 @@ const Demand: DeamandProps = ({ projectType }) => {
         <>
           <Text style={styles.title}>Agregar demanda energetica</Text>
           <Resources {...cardMapper[projectType]} />
-          <FloatingButton {...{ projectType }} />
+          <Floating projectType={projectType} handlePress={handleFormOpen} />
           <View style={styles.treeContainer}>
             <SvgXml xml={trees} width={277} height={121} />
           </View>
@@ -46,7 +33,13 @@ const Demand: DeamandProps = ({ projectType }) => {
             <SvgXml xml={trees} width={277} height={121} />
           </View>
           <View style={styles.formSection}>
-            <Tabs {...{ labels, components, tabs, icons }} />
+            <Tabs
+              tabs={tabs}
+              icons={icons}
+              labels={labels}
+              components={components}
+              handlePress={handleFormClose}
+            />
           </View>
         </>
       )}

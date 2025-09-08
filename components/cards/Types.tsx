@@ -6,7 +6,7 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 
 import { Color, getIconByUUID, getTitleByUUID } from "../../values";
 
-const Types: TypesProps = ({ handleSelected, label, uuid }) => {
+const Types: TypesProps = ({ handlePress, label, uuid }) => {
   const iconContainer =
     uuid === "demand"
       ? styles.iconContainerDemand
@@ -17,7 +17,7 @@ const Types: TypesProps = ({ handleSelected, label, uuid }) => {
       : styles.iconContainerBudget;
   return (
     <View>
-      <Pressable onPress={handleSelected(uuid)} style={styles.container}>
+      <Pressable onPress={handlePress(uuid)} style={styles.container}>
         <View style={iconContainer}>
           <SvgXml xml={getIconByUUID(uuid)} width={24} height={24} />
         </View>

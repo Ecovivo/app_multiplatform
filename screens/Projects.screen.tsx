@@ -1,13 +1,13 @@
 import type { ProjectsProps } from "../models";
 
 //import { useState } from "react";
-//import { SvgXml } from "react-native-svg";
+import { SvgXml } from "react-native-svg";
 import { Text, ScrollView, StyleSheet, View } from "react-native";
 
 import { Items } from "../components";
-import { Color, addCardMapper } from "../values";
+import { Color, trees } from "../values";
 
-const Projects: ProjectsProps = ({ projects }) => {
+const Projects: ProjectsProps = ({ projects, handlePress }) => {
   return (
     <ScrollView
       contentContainerStyle={styles.scrollContent}
@@ -15,19 +15,21 @@ const Projects: ProjectsProps = ({ projects }) => {
     >
       <Text style={styles.title}>Seleccione un proyecto</Text>
       {projects.map((it) => (
-        <Text style={styles.title} key={it.uuid}>
-          {it.name}
-        </Text>
+        <Items
+          id={it.id}
+          key={it.uuid}
+          name={it.name}
+          uuid={it.type}
+          handlePress={handlePress}
+        />
       ))}
+      <View style={styles.treeContainer}>
+        <SvgXml xml={trees} width={277} height={121} />
+      </View>
     </ScrollView>
   );
 };
 
-/*
-(
-        <AddResourceCard {...addCardMapper[it.type]} />
-      )
-*/
 const styles = StyleSheet.create({
   scrollContent: {
     flexGrow: 1,

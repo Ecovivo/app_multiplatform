@@ -1,3 +1,3 @@
-export * from './Items.model';
-export * from './resources.model';
-export * from './types.model';
+export * from "./items.models";
+export * from "./resources.model";
+export * from "./types.model";

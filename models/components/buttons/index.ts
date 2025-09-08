@@ -1,1 +1,1 @@
-export * from './floatingButton.model';
+export * from "./floating.model";

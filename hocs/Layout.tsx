@@ -1,28 +1,37 @@
 import { FC } from "react";
 import type { ProjectDTO, MyScreen, ProjectType, ProjectDAO } from "../models";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useSQLiteContext } from "expo-sqlite";
 
 import { Intro, Selected, Demand, Projects } from "../screens";
-import { getProjectMapper } from "../utils";
+import { getProjectMapper, getTypeProject } from "../utils";
 
 const Layout: FC = () => {
   const db = useSQLiteContext();
-  const [version, setVersion] = useState<string>("");
-  const [screen, setScreen] = useState<MyScreen>("intro");
   const [projects, setProjects] = useState<ProjectDAO[]>([]);
-  const [projectName, onChangeProjectName] = useState<string>("");
-  const [projectType, setProjectType] = useState<ProjectType | null>(null);
-  const [isFocused, setIsFocused] = useState<boolean>(false);
-
+  const setup = useCallback(async () => {
+    const result = await db.getAllAsync<ProjectDTO>("SELECT * FROM projects");
+    const projects = await getProjectMapper(result);
+    await setProjects(projects);
+  }, []);
   useEffect(() => {
-    async function setup() {
-      const result = await db.getAllAsync<ProjectDTO>("SELECT * FROM projects");
-      setProjects(getProjectMapper(result));
-    }
     setup();
   }, []);
+  return <Innert projects={projects} />;
+};
+
+interface InnertInput {
+  projects: ProjectDAO[];
+}
+type InnertProps = FC<InnertInput>;
+
+const Innert: InnertProps = ({ projects }) => {
+  const db = useSQLiteContext();
+  const [id, setId] = useState<number>();
+  const [screen, setScreen] = useState<MyScreen>("intro");
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [projectName, onChangeProjectName] = useState<string>("");
 
   const handleFocused = () => setIsFocused(true);
   const handleBlur = () => setIsFocused(false);
@@ -33,11 +42,23 @@ const Layout: FC = () => {
     setScreen("projects");
   };
 
-  const handleSelected = (value: ProjectType) => () => {
-    setProjectType(value);
-    setScreen(value);
+  const handleProjects = (type: ProjectType, id: number) => () => {
+    setId(id);
+    setScreen(type);
   };
-  console.log(projects);
+
+  const handleSelected = (type: ProjectType) => async () => {
+    const result = await db.runAsync(
+      "INSERT INTO projects (name, type) VALUES (?, ?)",
+      projectName,
+      getTypeProject(type)
+    );
+    setId(result.lastInsertRowId);
+    //console.log(result.lastInsertRowId);
+    setScreen(type);
+  };
+
+  if (!projects?.length) return null;
 
   const isIntro = screen === "intro";
   const isProjects = screen === "projects";
@@ -66,13 +87,13 @@ const Layout: FC = () => {
     );
   }
   if (isSelected) {
-    return <Selected {...{ handleSelected }} />;
+    return <Selected handlePress={handleSelected} />;
   }
   if (isProjects) {
-    return <Projects projects={projects} />;
+    return <Projects projects={projects} handlePress={handleProjects} />;
   }
-  if (isDemand && projectType) {
-    return <Demand {...{ projectType }} />;
+  if (isDemand && id) {
+    return <Demand id={id} />;
   }
   return null;
 };

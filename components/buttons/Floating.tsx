@@ -1,4 +1,4 @@
-import type { FloatingButtonProps } from "../../models";
+import type { FloatingProps } from "../../models";
 
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
@@ -6,7 +6,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { add, Color } from "../../values";
 import { SvgXml } from "react-native-svg";
 
-const Floating: FloatingButtonProps = ({ projectType }) => {
+const Floating: FloatingProps = ({ projectType, handlePress }) => {
   const iconFab =
     projectType === "demand"
       ? styles.fabDemand
@@ -20,10 +20,7 @@ const Floating: FloatingButtonProps = ({ projectType }) => {
       {/* Your main screen content goes here */}
       <Text>This is some content on the screen.</Text>
 
-      <TouchableOpacity
-        style={iconFab}
-        onPress={() => alert("Floating button pressed!")}
-      >
+      <TouchableOpacity style={iconFab} onPress={handlePress}>
         <SvgXml xml={add} width={32} height={32} />
       </TouchableOpacity>
     </View>

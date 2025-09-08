@@ -1,3 +1,3 @@
-export * from "./FloatingButton";
+export * from "./buttons";
 export * from "./cards";
 export * from "./Tabs";

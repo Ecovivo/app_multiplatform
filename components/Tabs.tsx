@@ -1,18 +1,19 @@
-import type { FC } from "react";
-import type { TabsProps } from "../models";
+import type { TabsProps, ComponentProps } from "../models";
 
-import React, { ReactNode, useState } from "react";
+import React, { useState } from "react";
 import { SvgXml } from "react-native-svg";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
 import { Color } from "../values";
 
-const Tabs: TabsProps = ({ labels, components, tabs, icons }) => {
+const Tabs: TabsProps = ({ labels, components, tabs, icons, handlePress }) => {
   const [icon, setIcon] = useState<(typeof icons)[number]>(icons[0]);
   const [activeLabel, setActiveLabel] = useState<(typeof labels)[number]>(
     labels[0]
   );
-  const [activeTab, setActiveTab] = useState<(typeof tabs)[number]>(tabs[0]);
+  const [activeTab, setActiveTab] = useState<(typeof tabs)[number] | null>(
+    tabs[0]
+  );
   const [wasFocusTabs, setWasFocusTabs] = useState<(typeof tabs)[number][]>([
     tabs[0],
   ]);
@@ -25,6 +26,12 @@ const Tabs: TabsProps = ({ labels, components, tabs, icons }) => {
     setIcon(icons[index]);
   };
 
+  const handleNextPress = () => {
+    console.log(",,,,,,,,,,,,,", tabs, tabs.length);
+    const index = tabs.findIndex(() => activeTab);
+    setActiveTab(index + 1 <= tabs.length ? tabs[index + 1] : null);
+  };
+
   const getColorTab = (tab: (typeof tabs)[number]) =>
     activeTab === tab
       ? Color.card.success
@@ -32,14 +39,21 @@ const Tabs: TabsProps = ({ labels, components, tabs, icons }) => {
       ? Color.card.primary
       : "gray";
 
+  if (activeTab == null) {
+    handlePress();
+    return null;
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.titleTabs}>{activeLabel}</Text>
+
       <View style={styles.tabBar}>
         {tabs.map((it) => (
           <TouchableOpacity
             key={it}
             onPress={getHandlePress(it)}
+            disabled={wasFocusTabs.includes(activeTab)}
             style={[
               styles.tabButton,
               activeTab === it && styles.activeTabButton,
@@ -51,8 +65,12 @@ const Tabs: TabsProps = ({ labels, components, tabs, icons }) => {
       </View>
       <View style={styles.contentContainer}>
         {tabs.map((it, i) => {
-          const Component = components[i] as FC;
-          return activeTab === it && <Component key={it} />;
+          const Component = components[i] as ComponentProps;
+          return (
+            activeTab === it && (
+              <Component key={it} handlePress={handleNextPress} />
+            )
+          );
         })}
       </View>
     </View>

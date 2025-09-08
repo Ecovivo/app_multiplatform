@@ -23,7 +23,9 @@ export interface ProjectDTO extends ProjectDB {
 
 export interface ProjectDAO extends Project {
   uuid: string;
+  id: number;
 }
 
 export type GetType = (typeDB: ProjectBDType) => ProjectType;
 export type GetProjectMapper = (resolve: ProjectDTO[]) => ProjectDAO[];
+export type GetTypeProject = (type: ProjectType) => ProjectBDType;
