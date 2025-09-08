@@ -34,7 +34,7 @@ const Innert: InnertProps = ({ projects }) => {
   const [id, setId] = useState<number>();
   const [screen, setScreen] = useState<MyScreen>("intro");
   const [projectName, onChangeProjectName] = useState<string>("");
-  const { setDemandItems } = useStep();
+  const { setDemandItems, setDischargeDepth, setAutonomyDays } = useStep();
 
   const isIntro = screen === "intro";
   const isProjects = screen === "projects";
@@ -95,21 +95,23 @@ const Innert: InnertProps = ({ projects }) => {
     };
     return <Demand handlePress={handleDemand} />;
   }
-  /*
+
   if (isDischargeDepth) {
-    const handleDischargeDepth = () => {
+    const handleDischargeDepth = (value: number) => () => {
+      setDischargeDepth(value);
       setScreen("autonomyDays");
     };
     return <DischargeDepth handlePress={handleDischargeDepth} />;
   }
-
   if (isAutonomyDays) {
-    const handleAutonomyDays = () => {
-
+    const handleAutonomyDays = (value: number) => () => {
+      setAutonomyDays(value);
+      setScreen("result");
     };
     return <AutonomyDays handlePress={handleAutonomyDays} />;
   }
 
+  /*
   if (isPlantFactor) {
     const handlePlantFactor = () => {
       setScreen("dischargeDepth");

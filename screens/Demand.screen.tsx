@@ -18,7 +18,6 @@ const Demand: DeamandProps = ({ handlePress }) => {
   const handleFormClose = () => setShowForm(false);
   const withoutEquips = equips.length === 0;
 
-  console.log("...", equips);
   const getEmpty = () => {
     return (
       <>
