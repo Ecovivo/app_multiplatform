@@ -7,6 +7,11 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Color } from "../values";
 
 const Tabs: TabsProps = ({ labels, components, tabs, icons, handlePress }) => {
+  // Safety checks for arrays
+  if (!tabs?.length || !labels?.length || !icons?.length || !components?.length) {
+    return null;
+  }
+
   const [icon, setIcon] = useState<(typeof icons)[number]>(icons[0]);
   const [activeLabel, setActiveLabel] = useState<(typeof labels)[number]>(
     labels[0]
@@ -21,14 +26,14 @@ const Tabs: TabsProps = ({ labels, components, tabs, icons, handlePress }) => {
   const getHandlePress = (tab: (typeof tabs)[number]) => () => {
     setWasFocusTabs((state) => (state.includes(tab) ? state : [...state, tab]));
     setActiveTab(tab);
-    const index = tabs.findIndex(() => tab);
+    const index = tabs.findIndex((t) => t === tab);
     setActiveLabel(labels[index]);
     setIcon(icons[index]);
   };
 
   const handleNextPress = () => {
-    const index = tabs.findIndex(() => activeTab);
-    setActiveTab(index + 1 <= tabs.length ? tabs[index + 1] : null);
+    const index = tabs.findIndex((t) => t === activeTab);
+    setActiveTab(index !== -1 && index + 1 < tabs.length ? tabs[index + 1] : null);
   };
 
   const getColorTab = (tab: (typeof tabs)[number]) =>

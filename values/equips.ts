@@ -367,7 +367,11 @@ const equips: Equip[] = [
   { name: "Luminaria", type: "Led 75W", power: 9, average_daily_hour: 8.0 },
 ];
 
-export const getCategories = () =>
-  equips.reduce((prev, curr) => {
-    return prev.add(curr.name);
-  }, new Set());
+type GetCategories = () => string[];
+
+export const getCategories: GetCategories = () =>
+  Array.from(
+    equips.reduce((prev, curr) => {
+      return prev.add(curr.name);
+    }, new Set<string>())
+  );

@@ -4,7 +4,7 @@ import { ProjectDAO } from "../domain";
 
 export interface IntroInput {
   projectName: string;
-  projects: ProjectDAO[];
+  projects?: ProjectDAO[];
   onChangeProjectName: Dispatch<SetStateAction<string>>;
   handleCreate: HandleVoid;
   handleView: HandleVoid;
